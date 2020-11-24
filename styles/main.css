@@ -1,0 +1,40 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(216, 216, 216);
+    background-size: cover;
+}
+
+canvas {
+    width: 500px;
+    height: 500px;
+    border: solid black 1px;
+}
+
+p {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+p#time {
+    top: 20px;
+}
+
+p#traits {
+    top: 40px;
+}
+
+p#creature {
+    top: 60px;
+}
