@@ -22,7 +22,7 @@ Creature.prototype = {
 
         this.dir += (-1 + Math.random() * 2) * this.a;
 
-        this.e -= 0.0008 * ((this.v * this.v * this.s) / 2);
+        this.e -= 0.000032 * ((this.v * this.v * this.s * this.s) / 2);
 
         if (this.e <= 0) death();
 
@@ -48,3 +48,5 @@ Creature.prototype = {
         context.fill();
     }
 }
+
+export default Creature;

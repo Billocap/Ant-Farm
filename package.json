@@ -1,0 +1,25 @@
+{
+  "name": "ant-farm",
+  "version": "1.0.0",
+  "description": "Ant farm is an evolution simulation based on genetics and natural selection.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Billocap/Ant-Farm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Billocap/Ant-Farm/issues"
+  },
+  "homepage": "https://github.com/Billocap/Ant-Farm#readme",
+  "devDependencies": {
+    "webpack": "^5.21.1",
+    "webpack-cli": "^4.5.0"
+  }
+}

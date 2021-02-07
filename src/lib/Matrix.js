@@ -123,3 +123,5 @@ Matrix.prototype = {
         }
     }
 };
+
+export default Matrix;

@@ -1,3 +1,6 @@
+import Creature from "./lib/Creature";
+import Matrix from "./lib/Matrix";
+
 var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 
@@ -21,6 +24,17 @@ var cView = document.querySelector("#creature");
 var sum = 0, steps = 1, peak = 0, season;
 
 var isPaused = true;
+
+function play() {
+    isPaused = false;
+};
+
+function pause() {
+    isPaused = true;
+};
+
+document.querySelector("#play").onclick = play;
+document.querySelector("#pause").onclick = pause;
 
 var env = new Matrix(100, 100);
 var hunt = new Matrix(10, 10);
@@ -53,7 +67,7 @@ var mainLoop = setInterval( _ => {
             }
 
             if (cell < 1) {
-                env.filter(x, y, value => value + (0.01 - 0.01 * season));
+                env.filter(x, y, value => value + (0.02 - 0.03 * season));
             }
 
             ctx.fillStyle = `hsl(120, ${cell * 100}%, ${30 - season * 10}%)`;
@@ -81,9 +95,7 @@ var mainLoop = setInterval( _ => {
 
                 population.splice(index, 1);
             }, _ => {
-                if (population.length < 200) {
-                    population.push(creature.mutate(2, 0.1, 0.1, 0.5));
-                }
+                population.push(creature.mutate(2, 0.1, 0.1, 0.5));
             });
 
             creature.draw(ctx);
@@ -94,20 +106,23 @@ var mainLoop = setInterval( _ => {
 
         hunt.forCell((value, x, y) => {
             if(value.length > 1) {
-                value.forEach((creature, index) => {
-                    for (let c = index + 1; c < value.length; c++) {
-                        let a = value[c].x * value[c].x;
-                        let b = value[c].y * value[c].y;
-                        let r = (creature.s / 2) * (creature.s / 2);
+                value.forEach( creature => {
+                    for (let c = 0; c < value.length; c++) {
+                        if (creature.s > value[c].s * 1.2) {
+                            let a = value[c].x - creature.x;
+                            let b = value[c].y - creature.y;
+                            let r = (creature.s / 2) + (value[c].s / 2);
 
-                        if (a + b <= r) {
-                            population.splice(c, 1);
+                            if (a * a + b * b <= r * r) {
+                                creature.e += Math.min(creature.bite, value[c].e / 10);
+                                population.splice(c, 1);
+                            }
                         }
                     }
                 });
             }
 
-            ctx.strokeRect(x * 50, y * 50, 50, 50);
+            //ctx.strokeRect(x * 50, y * 50, 50, 50);
         });
 
         hunt.apply(0, _ => []);
