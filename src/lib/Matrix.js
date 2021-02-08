@@ -19,7 +19,7 @@ Matrix.prototype = {
         this.elements = new Array(width * height).fill(0);
     },
     value(x, y, value = undefined) {
-        const index = x + y * this.height;
+        const index = x + y * this.width;
 
         if (index > this.length || index < 0) return undefined;
 
@@ -28,7 +28,7 @@ Matrix.prototype = {
         return this.elements[index];
     },
     filter(x, y, fn = value => value) {
-        const index = x + y * this.height;
+        const index = x + y * this.width;
 
         if (index > this.length || index < 0) return undefined;
 

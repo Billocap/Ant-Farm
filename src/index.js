@@ -1,10 +1,12 @@
+import perlin from "./lib/perlin";
 import Creature from "./lib/Creature";
 import Matrix from "./lib/Matrix";
+import heightmap from "./lib/heightmap";
 
 var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 
-var mouse = {
+/*var mouse = {
     x: 0,
     y: 0
 };
@@ -37,8 +39,16 @@ document.querySelector("#play").onclick = play;
 document.querySelector("#pause").onclick = pause;
 
 var env = new Matrix(100, 100);
-var hunt = new Matrix(10, 10);
+var hunt = new Matrix(10, 10);*/
 
+/*var h_map = perlin(2, 1);
+var h_map2 = perlin(4, 1/2);
+var h_map3 = perlin(8, 1/4);
+var h_map4 = perlin(16, 1/8);*/
+
+var h_map = heightmap(512, 512);
+
+/*
 hunt.apply(0, _ => []);
 
 var xStep = 500 / env.width, yStep = 500 / env.height;
@@ -50,14 +60,21 @@ var population = [
     new Creature("red", {v: 5, e: 0, a: Math.PI, b: 5, s: 5}, Math.random() * 495, Math.random() * 495)
 ];
 
-var speeds = 0, angles = 0;
+var speeds = 0, angles = 0;*/
 
-var mainLoop = setInterval( _ => {
-    if (!isPaused) {
-        canvas.setAttribute("width", 500);
-        canvas.setAttribute("height", 500);
+//var mainLoop = setInterval( _ => {
+    //if (!isPaused) {
+        canvas.setAttribute("width", 512);
+        canvas.setAttribute("height", 512);
 
-        season = (1 - Math.sin(steps * 2 * Math.PI / 365)) / 2;
+        for (let y = 0; y < 512; y += 10) {
+            for (let x = 0; x < 512; x += 10) {
+                ctx.fillStyle = `hsl(0, 0%, ${h_map.point(x, y) * 100}%)`;
+                ctx.fillRect(x, y, 10, 10);
+            }
+        }
+
+        /*season = (1 - Math.sin(steps * 2 * Math.PI / 365)) / 2;
         speeds = 0;
         angles = 0;
 
@@ -142,6 +159,6 @@ var mainLoop = setInterval( _ => {
 
         if (population.length > peak) peak = population.length;
 
-        if (population.length === 0) isPaused = true;
-    }
-}, 1000 / 15);
+        if (population.length === 0) isPaused = true;*/
+    //}
+//}, 1000 / 15);
